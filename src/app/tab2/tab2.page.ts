@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonFab, IonFabButton, IonIcon, IonGrid, IonRow, IonCol, IonImg } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { camera } from 'ionicons/icons';
@@ -12,10 +12,14 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonFab, IonFabButton, IonIcon, IonGrid, IonRow, IonCol, IonImg]
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
 
   constructor(public photoService: PhotoService) {
     addIcons({ camera });
+  }
+
+  async ngOnInit() {
+    await this.photoService.loadSaved();
   }
 
   addPhotoToGallery() {
